@@ -10,7 +10,7 @@
 # Run:
 # $ docker run --rm -d --env-file sendy.env sendy:latest
 
-FROM ghcr.io/mpyw/php-eol-cve-2026-109618-109619:8.0-apache AS sendy
+FROM ghcr.io/mpyw/php-eol-cve-2026-109618-109619:8.0.30-apache-bullseye-v1.1.0 AS sendy
 
 ARG SENDY_VER=6.1.3
 ARG ARTIFACT_DIR=6.1.3
