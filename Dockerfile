@@ -44,7 +44,7 @@ RUN unzip /tmp/sendy-${SENDY_VER}.zip -d /tmp \
   && printf "\n\n# Ensure X-Powered-By is always removed regardless of php.ini or other settings.\n\
   Header always unset \"X-Powered-By\"\n\
   Header unset \"X-Powered-By\"\n" >> /var/www/html/.htaccess \
-  && printf "[PHP]\nerror_reporting = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED\n" > /usr/local/etc/php/conf.d/error_reporting.ini
+  && printf "[PHP]\nerror_reporting = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED\n" > /usr/local/etc/php/conf.d/error_reporting.ini \
   && printf "session.upload_progress.enabled = Off\n" > /usr/local/etc/php/conf.d/zz-security.ini
 
 # Apache config
