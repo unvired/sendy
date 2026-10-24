@@ -45,6 +45,7 @@ RUN unzip /tmp/sendy-${SENDY_VER}.zip -d /tmp \
   Header always unset \"X-Powered-By\"\n\
   Header unset \"X-Powered-By\"\n" >> /var/www/html/.htaccess \
   && printf "[PHP]\nerror_reporting = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED\n" > /usr/local/etc/php/conf.d/error_reporting.ini
+  && printf "session.upload_progress.enabled = Off\n" > /usr/local/etc/php/conf.d/zz-security.ini
 
 # Apache config
 RUN a2enconf serverName
@@ -64,15 +65,5 @@ RUN chmod 0644 /etc/cron.d/cron \
 COPY artifacts/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
-
-#######################
-# XDEBUG Installation
-#######################
-FROM sendy as debug
-# Install xdebug extension
-RUN pecl channel-update pecl.php.net \
-  && pecl install xdebug \
-  && docker-php-ext-enable xdebug \
-  && rm -rf /tmp/pear 
 
 
